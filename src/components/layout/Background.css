@@ -1,0 +1,74 @@
+.global-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--color-bg);
+    transition: background-color 0.3s ease;
+}
+
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    animation: drift 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bg-shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vh;
+    background: radial-gradient(circle, #4f46e5 0%, transparent 70%);
+    animation-delay: 0s;
+}
+
+.bg-shape-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+    animation-delay: -5s;
+}
+
+.bg-shape-3 {
+    top: 40%;
+    left: 40%;
+    width: 40vw;
+    height: 40vh;
+    background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
+    animation-delay: -10s;
+    opacity: 0.1;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, 50px) scale(1.1);
+    }
+}
+
+/* Light Mode Overrides with gentler colors */
+[data-theme="light"] .bg-shape-1 {
+    background: radial-gradient(circle, #c7d2fe 0%, transparent 70%);
+    opacity: 0.4;
+}
+
+[data-theme="light"] .bg-shape-2 {
+    background: radial-gradient(circle, #fbcfe8 0%, transparent 70%);
+    opacity: 0.4;
+}
+
+[data-theme="light"] .bg-shape-3 {
+    background: radial-gradient(circle, #bae6fd 0%, transparent 70%);
+    opacity: 0.3;
+}
