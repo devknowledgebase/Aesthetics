@@ -73,10 +73,14 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
+                {/* Mobile Menu Toggle */}
+                <div className="mobile-controls">
+                    <ThemeToggle />
+                    <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                    </div>
                 </div>
             </div>
 
@@ -88,7 +92,6 @@ const Navbar = () => {
                     <li onClick={() => setIsOpen(false)}><a href="#pricing">Pricing</a></li>
                 </ul>
                 <div className="nav-actions-mobile">
-                    <ThemeToggle />
                     <a href="#signin" className="btn-text" onClick={() => setIsOpen(false)}>Sign In</a>
                     <a href="#get-started" className="btn-primary" onClick={() => setIsOpen(false)}>Get Started</a>
                 </div>

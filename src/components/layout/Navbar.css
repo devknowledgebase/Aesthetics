@@ -126,10 +126,17 @@
 }
 
 /* Mobile Menu Styles */
-.hamburger {
+.mobile-controls {
     display: none;
-    cursor: pointer;
+    align-items: center;
+    gap: 1.5rem;
     z-index: 1001;
+}
+
+.hamburger {
+    display: block;
+    /* Always block, controlled by parent container visibility */
+    cursor: pointer;
 }
 
 .bar {
@@ -207,6 +214,10 @@
 }
 
 @media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+    }
+
     .hamburger {
         display: block;
     }
