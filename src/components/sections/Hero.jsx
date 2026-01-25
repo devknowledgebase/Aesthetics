@@ -3,70 +3,73 @@ import gsap from 'gsap';
 import './Hero.css';
 
 const Hero = () => {
-    const containerRef = useRef(null);
-    const titleRef = useRef(null);
-    const subtitleRef = useRef(null);
-    const buttonsRef = useRef(null);
-    const shapesRef = useRef([]);
+    const heroRef = useRef(null);
+    const contentRef = useRef(null);
+    const badgeRef = useRef(null);
+    const headingRef = useRef(null);
+    const subRef = useRef(null);
+    const actionsRef = useRef(null);
+    const footerRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-            tl.fromTo(titleRef.current,
-                { y: 50, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1.2, delay: 0.5 }
-            )
-                .fromTo(subtitleRef.current,
-                    { y: 20, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 1 },
-                    "-=0.8"
-                )
-                .fromTo(buttonsRef.current,
-                    { y: 20, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 1 },
-                    "-=0.8"
-                );
+            // Initial state set in CSS or via set() for no-flash
+            gsap.set([badgeRef.current, headingRef.current, subRef.current, actionsRef.current, footerRef.current], { autoAlpha: 0, y: 20 });
 
-            // Background shapes animation
-            const shapes = gsap.utils.toArray(".hero-orb");
-            shapes.forEach((shape, i) => {
-                gsap.to(shape, {
-                    x: "random(-100, 100)",
-                    y: "random(-50, 50)",
-                    scale: "random(0.8, 1.2)",
-                    duration: "random(10, 20)",
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: i * 0.5
-                });
-            });
-        }, containerRef); // Scope to container
+            // Orchestrated sequence
+            tl.to(badgeRef.current, { duration: 0.8, autoAlpha: 1, y: 0, delay: 0.2 })
+                .to(headingRef.current, { duration: 1, autoAlpha: 1, y: 0 }, "-=0.6")
+                .to(subRef.current, { duration: 0.8, autoAlpha: 1, y: 0 }, "-=0.8")
+                .to(actionsRef.current, { duration: 0.8, autoAlpha: 1, y: 0 }, "-=0.6")
+                .to(footerRef.current, { duration: 0.8, autoAlpha: 1, y: 0 }, "-=0.6");
 
-        return () => ctx.revert(); // Cleanup
+        }, heroRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
-        <section className="hero" ref={containerRef}>
-            <div className="hero-bg-glow"></div>
-            <div className="hero-shapes">
-                <div ref={el => shapesRef.current[0] = el} className="hero-orb orb-1"></div>
-                <div ref={el => shapesRef.current[1] = el} className="hero-orb orb-2"></div>
-                <div ref={el => shapesRef.current[2] = el} className="hero-orb orb-3"></div>
-            </div>
-            <div className="container hero-container">
-                <h1 ref={titleRef}>
-                    Crafting <span className="text-gradient">Digital Excellence</span>
+        <section className="hero-minimal" ref={heroRef}>
+            <div className="hero-content" ref={contentRef}>
+                <div className="hero-badge" ref={badgeRef}>
+                    <span className="badge-dot"></span>
+                    <span className="badge-text">v2.0 is now available</span>
+                </div>
+
+                <h1 ref={headingRef}>
+                    Design for the <br />
+                    <span className="text-highlight">ambitious web.</span>
                 </h1>
-                <p ref={subtitleRef}>
-                    Elevate your web presence with a design system built for speed, beauty, and performance.
+
+                <p ref={subRef}>
+                    A unified design system that helps you build beautiful,
+                    accessible, and performant web applications with speed and precision.
                 </p>
-                <div className="hero-actions" ref={buttonsRef}>
-                    <a href="#get-started" className="btn-primary">Start Building</a>
-                    <a href="#demo" className="btn-secondary">View Demo</a>
+
+                <div className="hero-actions" ref={actionsRef}>
+                    <a href="#start" className="btn-primary-minimal">
+                        Start Building
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </a>
+                    <a href="#docs" className="btn-secondary-minimal">Read Documentation</a>
+                </div>
+
+                <div className="hero-footer" ref={footerRef}>
+                    <span className="trusted-text">Trusted by design-forward teams</span>
+                    <div className="company-logos">
+                        {/* Abstract Placeholders for logos to keep it minimal/neutral */}
+                        <div className="logo-placeholder"></div>
+                        <div className="logo-placeholder"></div>
+                        <div className="logo-placeholder"></div>
+                        <div className="logo-placeholder"></div>
+                    </div>
                 </div>
             </div>
+
+            {/* Subtle Grid Background */}
+            <div className="grid-background"></div>
         </section>
     );
 };
