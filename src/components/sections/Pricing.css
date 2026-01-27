@@ -84,3 +84,11 @@
     transition: opacity 0.2s;
     text-align: center;
 }
+
+.btn-secondary {
+    color: var(--color-accent-secondary);
+}
+
+[data-theme="light"] .btn-secondary {
+    color: var(--color-text-main);
+}
