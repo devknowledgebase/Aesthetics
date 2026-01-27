@@ -34,6 +34,7 @@
 .hero-content {
     position: relative;
     z-index: 10;
+    width: 100%;
     max-width: 800px;
     text-align: center;
     display: flex;
@@ -185,6 +186,8 @@
 
 .company-logos {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
     opacity: 0.4;
 }
@@ -199,17 +202,54 @@
 
 @media (max-width: 768px) {
     .hero-minimal h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+    }
+
+    .hero-minimal h1 br {
+        display: none;
+    }
+
+    .hero-minimal p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        padding: 0 1.5rem;
     }
 
     .hero-actions {
         flex-direction: column;
         width: 100%;
+        gap: 1rem;
     }
 
     .btn-primary-minimal,
     .btn-secondary-minimal {
         width: 100%;
         justify-content: center;
+    }
+
+    .company-logos {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-minimal h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-minimal p {
+        font-size: 1rem;
+    }
+
+    .company-logos {
+        gap: 1rem;
+    }
+
+    .logo-placeholder {
+        width: 80px;
     }
 }
